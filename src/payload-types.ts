@@ -70,6 +70,10 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    posts: Post;
+    events: Event;
+    heroes: Hero;
+    'registry-clicks': RegistryClick;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +84,10 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    heroes: HeroesSelect<false> | HeroesSelect<true>;
+    'registry-clicks': RegistryClicksSelect<false> | RegistryClicksSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -88,8 +96,12 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -186,6 +198,117 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  category: 'steps-to-marrow' | 'news' | 'education';
+  author: number | User;
+  publishedAt?: string | null;
+  meta?: {
+    /**
+     * The blue link text in Google results. Keep under 60 chars.
+     */
+    title?: string | null;
+    /**
+     * The grey text under the link. Keep under 160 chars.
+     */
+    description?: string | null;
+    /**
+     * Image shown when shared on Slack/LinkedIn/Twitter. Recommended size: 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  startDateTime: string;
+  endDateTime?: string | null;
+  location?: string | null;
+  link?: string | null;
+  meta?: {
+    /**
+     * The blue link text in Google results. Keep under 60 chars.
+     */
+    title?: string | null;
+    /**
+     * The grey text under the link. Keep under 160 chars.
+     */
+    description?: string | null;
+    /**
+     * Image shown when shared on Slack/LinkedIn/Twitter. Recommended size: 1200x630.
+     */
+    image?: (number | null) | Media;
+  };
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "heroes".
+ */
+export interface Hero {
+  id: number;
+  name: string;
+  type?: ('marrow' | 'stem-cell' | 'monetary' | 'advocate') | null;
+  photo?: (number | null) | Media;
+  story?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Read-only log of clicks to registries.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registry-clicks".
+ */
+export interface RegistryClick {
+  id: number;
+  country: string;
+  registryName?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -219,6 +342,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'heroes';
+        value: number | Hero;
+      } | null)
+    | ({
+        relationTo: 'registry-clicks';
+        value: number | RegistryClick;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -313,6 +452,69 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  author?: T;
+  publishedAt?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  startDateTime?: T;
+  endDateTime?: T;
+  location?: T;
+  link?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "heroes_select".
+ */
+export interface HeroesSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  photo?: T;
+  story?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registry-clicks_select".
+ */
+export interface RegistryClicksSelect<T extends boolean = true> {
+  country?: T;
+  registryName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -350,6 +552,47 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  announcementBanner?: {
+    isActive?: boolean | null;
+    message?: string | null;
+    link?: string | null;
+  };
+  fundraising?: {
+    /**
+     * The code used to embed the widget.
+     */
+    givebutterCode?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  announcementBanner?:
+    | T
+    | {
+        isActive?: T;
+        message?: T;
+        link?: T;
+      };
+  fundraising?:
+    | T
+    | {
+        givebutterCode?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
