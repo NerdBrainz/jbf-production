@@ -1,41 +1,134 @@
-:root {
-  color-scheme: dark;
-  font-family:
-    'Inter',
-    'SF Pro Display',
-    -apple-system,
-    system-ui,
-    sans-serif;
-  background-color: #0f172a;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* LIGHT MODE SETTINGS */
+    color-scheme: light;
+    font-family:
+      'Inter',
+      'SF Pro Display',
+      -apple-system,
+      system-ui,
+      sans-serif;
+
+    /* Background is White */
+    --background: 0 0% 100%;
+    /* Text is Dark Gray */
+    --foreground: 260 10% 15%;
+
+    /* Cards are White in light mode */
+    --card: 0 0% 100%;
+    /* Card Text is Dark Gray */
+    --card-foreground: 260 10% 15%;
+
+    /* Popovers are White */
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 10% 15%;
+
+    /* Primary: Bright Purple */
+    --primary: 265 85% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Pink */
+    --secondary: 310 75% 58%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted: Light Gray-Purple */
+    --muted: 260 20% 96%;
+    --muted-foreground: 260 10% 40%;
+
+    --accent: 265 80% 95%;
+    --accent-foreground: 265 85% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 20% 90%;
+    --input: 260 20% 90%;
+    --ring: 265 89% 56%;
+
+    --radius: 0.75rem;
+
+    /* Soft Glows for Light Mode */
+    --glow-1: 265 85% 85%; /* Much lighter for subtle effect */
+    --glow-2: 310 75% 85%;
+    --glow-3: 265 70% 80%;
+  }
+
+  .dark {
+    /* DARK MODE SETTINGS */
+    color-scheme: dark;
+
+    /* Background is Deep Plum */
+    --background: 265 40% 8%;
+    /* Text is White-ish */
+    --foreground: 260 10% 95%;
+
+    /* Cards are Dark Plum */
+    --card: 265 35% 12%;
+    --card-foreground: 260 10% 95%;
+
+    --popover: 265 35% 12%;
+    --popover-foreground: 260 10% 95%;
+
+    --primary: 265 90% 75%;
+    --primary-foreground: 265 40% 10%;
+
+    --secondary: 310 90% 70%;
+    --secondary-foreground: 310 40% 10%;
+
+    --muted: 265 30% 20%;
+    --muted-foreground: 260 10% 70%;
+
+    --accent: 265 40% 20%;
+    --accent-foreground: 260 10% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 265 30% 20%;
+    --input: 265 30% 20%;
+    --ring: 265 90% 75%;
+
+    /* Vibrant Glows for Dark Mode */
+    --glow-1: 265 90% 75%;
+    --glow-2: 310 90% 70%;
+    --glow-3: 265 60% 45%;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    /* Uses the CSS variables so it swaps automatically */
+    background:
+      radial-gradient(circle at 10% 20%, hsla(var(--glow-1) / 0.15), transparent 40%),
+      radial-gradient(circle at 80% 0%, hsla(var(--glow-2) / 0.15), transparent 35%),
+      radial-gradient(circle at 55% 80%, hsla(var(--glow-3) / 0.15), transparent 35%),
+      hsl(var(--background));
+    color: hsl(var(--foreground));
+    background-attachment: fixed; /* Keeps gradient in place while scrolling */
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(248, 113, 113, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(251, 146, 60, 0.12), transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.08), transparent 30%), #0f172a;
-}
-
+/* Utilities */
 .glass-panel {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  @apply bg-card text-card-foreground border-border;
+  border-width: 1px;
+  box-shadow: 0 20px 60px hsla(var(--foreground) / 0.05);
+  backdrop-filter: blur(12px);
 }
 
-.orange-glow {
+.violet-glow {
   background: radial-gradient(
     circle,
-    rgba(251, 146, 60, 0.16) 0%,
-    rgba(249, 115, 22, 0.05) 45%,
+    hsla(var(--glow-1) / 0.22) 0%,
+    hsla(var(--glow-2) / 0.12) 45%,
     transparent 60%
   );
   filter: blur(60px);
@@ -43,15 +136,10 @@ body {
 
 .grid-overlay {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(hsla(var(--foreground) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(var(--foreground) / 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
-  mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.9), transparent 70%);
-  opacity: 0.6;
-}
-
-.pill {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  opacity: 0.3;
+  pointer-events: none;
 }
