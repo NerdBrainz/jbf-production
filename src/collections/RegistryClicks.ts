@@ -1,4 +1,11 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
+
+type MaybeUser = { role?: string } | undefined
+
+const isAdmin: Access = ({ req: { user } }) => {
+  const typedUser = user as MaybeUser
+  return typedUser?.role === 'admin'
+}
 
 export const RegistryClicks: CollectionConfig = {
   slug: 'registry-clicks',
@@ -8,7 +15,7 @@ export const RegistryClicks: CollectionConfig = {
     description: 'Read-only log of clicks to registries.',
   },
   access: {
-    read: ({ req: { user } }) => (user as any)?.role === 'admin', // Only admin can see data
+    read: isAdmin, // Only admin can see data
     create: () => true, // Public API allows creation (tracking)
     update: () => false, // Immutable
     delete: () => false, // Immutable

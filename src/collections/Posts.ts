@@ -1,5 +1,17 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 import { seo } from '@/fields/seo' // Your SEO field group
+
+type MaybeUser = { id?: string | number; role?: string } | undefined
+
+const isAuthorOrAdmin: Access = ({ req: { user } }) => {
+  const typedUser = user as MaybeUser
+
+  if (typedUser?.role === 'admin') {
+    return true
+  }
+
+  return { author: { equals: typedUser?.id } }
+}
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -10,10 +22,7 @@ export const Posts: CollectionConfig = {
   access: {
     read: () => true, // Everyone can read
     // Guests can only update their own posts
-    update: ({ req: { user } }) => {
-      if ((user as any)?.role === 'admin') return true
-      return { author: { equals: user?.id } }
-    },
+    update: isAuthorOrAdmin,
   },
   fields: [
     {

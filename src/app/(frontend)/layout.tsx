@@ -1,4 +1,5 @@
 import React from 'react'
+import Script from 'next/script'
 import './styles.css'
 
 export const metadata = {
@@ -24,7 +25,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
+          id="tailwind-config"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `tailwind.config = {
               theme: {
@@ -41,7 +44,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             }` as string,
           }}
         />
-        <script src="https://cdn.tailwindcss.com" />
+        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
       </head>
       <body className="min-h-screen bg-slate-950 text-slate-50 antialiased">
         <main>{children}</main>
