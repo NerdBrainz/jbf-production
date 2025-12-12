@@ -8,7 +8,7 @@ export const RegistryClicks: CollectionConfig = {
     description: 'Read-only log of clicks to registries.',
   },
   access: {
-    read: ({ req: { user } }) => user?.role === 'admin', // Only admin can see data
+    read: ({ req: { user } }) => (user as any)?.role === 'admin', // Only admin can see data
     create: () => true, // Public API allows creation (tracking)
     update: () => false, // Immutable
     delete: () => false, // Immutable

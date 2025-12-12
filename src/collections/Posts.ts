@@ -11,7 +11,7 @@ export const Posts: CollectionConfig = {
     read: () => true, // Everyone can read
     // Guests can only update their own posts
     update: ({ req: { user } }) => {
-      if (user?.role === 'admin') return true
+      if ((user as any)?.role === 'admin') return true
       return { author: { equals: user?.id } }
     },
   },
