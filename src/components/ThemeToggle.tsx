@@ -12,7 +12,13 @@ const getInitialTheme = () => {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => getInitialTheme())
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    setTheme(getInitialTheme())
+  }, [])
 
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -26,6 +32,26 @@ export function ThemeToggle() {
   }, [theme])
 
   const nextTheme = theme === 'dark' ? 'light' : 'dark'
+
+  // Prevent hydration mismatch by not rendering theme-dependent content until mounted
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition hover:border-primary/60 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        aria-label="Toggle color mode"
+        disabled
+      >
+        <span
+          className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-xs text-primary"
+          aria-hidden
+        >
+          ☀️
+        </span>
+        <span>Light mode</span>
+      </button>
+    )
+  }
 
   return (
     <button
