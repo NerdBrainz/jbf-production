@@ -170,7 +170,7 @@ export default function HomePage() {
                     Already ready?
                   </p>
                   <p className="text-base font-semibold text-[hsl(var(--foreground))]">
-                    Go to your national registry (e.g., Be The Match in the U.S., Canadian Blood
+                    Go to your national registry (e.g., NMDP.org in the U.S., Canadian Blood
                     Services, DKMS, NHSBT) and enroll as a marrow or stem cell donor.
                   </p>
                 </div>
@@ -207,8 +207,8 @@ export default function HomePage() {
             </p>
             <p className="text-lg text-[hsl(var(--foreground))]">
               We organize donor registration drives across the Inland Northwest and work with
-              partners worldwide to grow marrow and stem cell registries like Be The Match. Jeana is
-              a volunteer ambassador for the National Donor Marrow Program and leads Steps To Marrow
+              partners worldwide to grow marrow and stem cell registries like NMDP.org. Jeana is a
+              volunteer ambassador for the National Donor Marrow Program and leads Steps To Marrow
               to help families find their match.
             </p>
             <p className="text-lg text-[hsl(var(--foreground))]">
@@ -221,8 +221,9 @@ export default function HomePage() {
             </ul>
             <p className="text-lg font-semibold text-[hsl(var(--foreground))]">
               If you are healthy and eligible, please join your country&apos;s official registry
-              today and stay listed—you could be the match someone is waiting for. Find the{' '}
-              <span className="underline">hero</span> in you.
+              today and stay listed—you could be someones match and give them the live saving
+              donation they are waiting for. Find the <span className="underline">hero</span> in
+              you.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <a
