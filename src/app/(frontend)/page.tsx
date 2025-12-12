@@ -39,7 +39,9 @@ export default function HomePage() {
             <p className="text-xs uppercase tracking-[0.3em] text-[hsl(var(--primary))]">
               Jada Bascom Foundation
             </p>
-            <p className="text-sm text-[hsl(var(--muted-foreground))]">Hope, research, and community.</p>
+            <p className="text-sm text-[hsl(var(--muted-foreground))]">
+              Hope, research, and community.
+            </p>
           </div>
         </div>
         <div className="pill hidden items-center gap-2 rounded-full px-4 py-2 text-sm text-[hsl(var(--foreground))] backdrop-blur-sm sm:flex">
@@ -63,8 +65,32 @@ export default function HomePage() {
               their marrow and stem cell registries, supporting families, and sharing the impact of
               every match.
             </p>
+            <a
+              href="https://www.nmdp.org/get-involved/join-the-registry"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-lg font-bold text-primary-foreground shadow-2xl shadow-primary/40 transition hover:scale-105 hover:shadow-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              <span>Join the National Marrow Donor Program </span>
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </a>
             <div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] px-4 py-4 text-sm text-[hsl(var(--card-foreground))] shadow-inner">
-              <p className="text-xs uppercase tracking-[0.2em] text-[hsl(var(--primary))]">Our priority</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[hsl(var(--primary))]">
+                Our priority
+              </p>
               <p className="mt-2 text-base font-semibold text-[hsl(var(--card-foreground))]">
                 Connecting people to their national marrow and stem cell registries so matches can
                 happen faster.
@@ -93,7 +119,7 @@ export default function HomePage() {
             </div>
           </div>
 
-            <div className="glass-panel relative rounded-3xl p-8 shadow-2xl lg:p-10">
+          <div className="glass-panel relative rounded-3xl p-8 shadow-2xl lg:p-10">
             <div
               className="absolute -left-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-purple-500/30 via-pink-400/20 to-purple-900/10 blur-3xl"
               aria-hidden
@@ -107,7 +133,9 @@ export default function HomePage() {
             <div className="mt-6 space-y-6">
               <div className="flex items-center justify-between rounded-2xl bg-[hsl(var(--card))] px-4 py-3 shadow-inner">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[hsl(var(--primary))]">Programs</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-[hsl(var(--primary))]">
+                    Programs
+                  </p>
                   <p className="text-lg font-semibold text-[hsl(var(--card-foreground))]">
                     Community donor drives, patient support, and an expanding network to massively
                     increase bone marrow and stem cell donor registration world wide.
@@ -154,8 +182,12 @@ export default function HomePage() {
         <section className="mt-16 grid gap-6 lg:mt-20 lg:grid-cols-3">
           {highlights.map((item) => (
             <div key={item.title} className="glass-panel flex flex-col gap-3 rounded-2xl p-6">
-              <p className="text-sm uppercase tracking-[0.2em] text-[hsl(var(--primary))]">{item.title}</p>
-              <p className="text-lg font-semibold text-[hsl(var(--card-foreground))]">{item.detail}</p>
+              <p className="text-sm uppercase tracking-[0.2em] text-[hsl(var(--primary))]">
+                {item.title}
+              </p>
+              <p className="text-lg font-semibold text-[hsl(var(--card-foreground))]">
+                {item.detail}
+              </p>
               <div className="h-px bg-gradient-to-r from-purple-400/70 via-white/10 to-transparent" />
               <p className="text-sm text-[hsl(var(--muted-foreground))]">{item.description}</p>
             </div>
@@ -164,7 +196,9 @@ export default function HomePage() {
 
         <section className="mt-16 rounded-3xl border border-white/10 bg-gradient-to-r from-purple-500/10 via-pink-400/5 to-slate-900 px-6 py-8 shadow-xl lg:px-10">
           <div className="max-w-4xl space-y-4">
-            <p className="text-sm uppercase tracking-[0.3em] text-[hsl(var(--primary))]">Our story</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-[hsl(var(--primary))]">
+              Our story
+            </p>
             <p className="text-lg text-[hsl(var(--foreground))]">
               Founded in 2009 by Jeana Moore when her granddaughter Jada faced Acute Myeloid
               Leukemia, the Jada Bascom Foundation exists because a matching bone marrow donor gave
@@ -190,6 +224,30 @@ export default function HomePage() {
               today and stay listed—you could be the match someone is waiting for. Find the{' '}
               <span className="underline">hero</span> in you.
             </p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <a
+                href="https://www.nmdp.org/get-involved/join-the-registry"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                Join the NMDP Registry
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </section>
       </main>
