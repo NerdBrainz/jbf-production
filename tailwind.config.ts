@@ -74,10 +74,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'), // Required for Shadcn
-    require('@tailwindcss/typography'), // Required for Blog Content
-  ],
+  plugins: [],
 }
 
 export default config
